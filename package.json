@@ -1,0 +1,31 @@
+{
+  "name": "health-tracker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "wrangler d1 migrations apply health-tracker-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply health-tracker-db --remote",
+    "db:studio": "drizzle-kit studio",
+    "deploy": "npm run build && wrangler pages deploy"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20250310.0",
+    "better-sqlite3": "^11.10.0",
+    "drizzle-orm": "^0.41.0",
+    "h3": "^1.15.1",
+    "nuxt": "^3.16.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.13.2",
+    "drizzle-kit": "^0.30.4",
+    "wrangler": "^4.1.0"
+  }
+}
