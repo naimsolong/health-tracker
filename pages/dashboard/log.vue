@@ -12,6 +12,10 @@ const form = reactive({
   bloodPressureDiastolic: '',
   heartRate: '',
   bloodSugar: '',
+  temperature: '',
+  respiratoryRate: '',
+  spo2: '',
+  waistCircumference: '',
   sleepHours: '',
   steps: '',
   waterIntake: '',
@@ -41,6 +45,10 @@ async function handleSubmit() {
       waterIntake: form.waterIntake ? Number(form.waterIntake) : undefined,
       mood: form.mood ? Number(form.mood) : undefined,
       notes: form.notes || undefined,
+      temperature: form.temperature ? Number(form.temperature) : undefined,
+      respiratoryRate: form.respiratoryRate ? Number(form.respiratoryRate) : undefined,
+      spo2: form.spo2 ? Number(form.spo2) : undefined,
+      waistCircumference: form.waistCircumference ? Number(form.waistCircumference) : undefined,
     }
 
     await saveEntry(payload)
@@ -96,6 +104,26 @@ async function handleSubmit() {
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Blood Sugar (mmol/L)</label>
             <input v-model="form.bloodSugar" type="number" step="0.1" min="0" placeholder="5.4"
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Temperature (°C)</label>
+            <input v-model="form.temperature" type="number" step="0.1" min="30" max="45" placeholder="36.6"
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">SpO₂ — Oxygen Saturation (%)</label>
+            <input v-model="form.spo2" type="number" step="0.1" min="70" max="100" placeholder="98.5"
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Respiratory Rate (breaths/min)</label>
+            <input v-model="form.respiratoryRate" type="number" min="0" max="60" placeholder="16"
+              class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Waist Circumference (cm)</label>
+            <input v-model="form.waistCircumference" type="number" step="0.1" min="0" placeholder="80"
               class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
           </div>
         </div>

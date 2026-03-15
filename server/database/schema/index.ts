@@ -1,1 +1,5 @@
 export * from './users'
+export * from './medical-profile'
+export * from './lab-results'
+export * from './symptoms'
+export * from './vaccinations'

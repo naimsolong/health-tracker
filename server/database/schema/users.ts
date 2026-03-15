@@ -25,6 +25,10 @@ export const healthEntries = sqliteTable('health_entries', {
   waterIntake: real('water_intake'),
   mood: integer('mood'),
   notes: text('notes'),
+  temperature: real('temperature'),
+  respiratoryRate: integer('respiratory_rate'),
+  spo2: real('spo2'),
+  waistCircumference: real('waist_circumference'),
   createdAt: text('created_at').notNull().default('CURRENT_TIMESTAMP'),
   updatedAt: text('updated_at').notNull().default('CURRENT_TIMESTAMP'),
 })

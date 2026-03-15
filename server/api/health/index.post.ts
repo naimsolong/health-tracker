@@ -34,6 +34,10 @@ export default defineEventHandler(async (event) => {
         waterIntake: body.waterIntake ?? existing.waterIntake,
         mood: body.mood ?? existing.mood,
         notes: body.notes ?? existing.notes,
+        temperature: body.temperature ?? existing.temperature,
+        respiratoryRate: body.respiratoryRate ?? existing.respiratoryRate,
+        spo2: body.spo2 ?? existing.spo2,
+        waistCircumference: body.waistCircumference ?? existing.waistCircumference,
         updatedAt: new Date().toISOString(),
       })
       .where(eq(healthEntries.id, existing.id))
@@ -56,6 +60,10 @@ export default defineEventHandler(async (event) => {
       waterIntake: body.waterIntake,
       mood: body.mood,
       notes: body.notes,
+      temperature: body.temperature,
+      respiratoryRate: body.respiratoryRate,
+      spo2: body.spo2,
+      waistCircumference: body.waistCircumference,
     })
     .returning()
 
