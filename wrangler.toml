@@ -1,7 +1,6 @@
 name = "health-tracker"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".output/public"
 
 [[d1_databases]]
 binding = "DB"
@@ -10,4 +9,4 @@ database_id = "b208f864-8d87-41d1-a20a-b0ae611b0e33"
 migrations_dir = "server/database/migrations"
 
 [vars]
-JWT_SECRET = "change-this-to-a-strong-random-secret"
+JWT_SECRET = "3e8a18f12169b4ba17c02ebd64af8696637599f8774c5ebe93b1496ec47759f3"
