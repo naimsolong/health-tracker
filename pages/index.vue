@@ -22,7 +22,7 @@ definePageMeta({ middleware: 'guest' })
               class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
               Sign in
             </NuxtLink>
-            <NuxtLink to="/register"
+            <NuxtLink to="/login"
               class="text-sm font-medium bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors">
               Get started free
             </NuxtLink>
@@ -48,7 +48,7 @@ definePageMeta({ middleware: 'guest' })
           help you make healthier choices every day.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <NuxtLink to="/register"
+          <NuxtLink to="/login"
             class="inline-flex items-center justify-center gap-2 bg-emerald-500 text-white font-semibold px-8 py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-200 text-lg">
             Start tracking for free
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,7 +121,7 @@ definePageMeta({ middleware: 'guest' })
         <p class="text-emerald-100 text-lg mb-8">
           Join thousands of people who track their health metrics and live healthier lives.
         </p>
-        <NuxtLink to="/register"
+        <NuxtLink to="/login"
           class="inline-flex items-center gap-2 bg-white text-emerald-600 font-semibold px-8 py-4 rounded-xl hover:bg-emerald-50 transition-all text-lg">
           Get started — it's free
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -5,6 +5,9 @@ import { hashPassword, signToken } from '../../utils/auth'
 import { useDb } from '../../utils/db'
 
 export default defineEventHandler(async (event) => {
+  throw createError({ statusCode: 404, message: 'Not found' })
+
+  // eslint-disable-next-line no-unreachable
   try {
     const body = await readBody(event)
     const { name, email, password } = body

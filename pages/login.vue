@@ -71,12 +71,6 @@ async function handleLogin() {
           </button>
         </form>
 
-        <p class="text-center text-sm text-gray-500 mt-6">
-          Don't have an account?
-          <NuxtLink to="/register" class="text-emerald-600 font-medium hover:text-emerald-700">
-            Create one free
-          </NuxtLink>
-        </p>
       </div>
     </div>
   </div>
