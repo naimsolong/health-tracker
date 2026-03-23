@@ -4,7 +4,7 @@ import { requireAuth } from '../../utils/auth'
 import { useDb } from '../../utils/db'
 
 export default defineEventHandler(async (event) => {
-  const authUser = requireAuth(event)
+  const authUser = await requireAuth(event)
   const config = useRuntimeConfig(event)
   const db = useDb(event)
 

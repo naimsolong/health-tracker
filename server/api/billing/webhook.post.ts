@@ -15,6 +15,10 @@ async function verifyStripeSignature(payload: string, sigHeader: string, secret:
     const signature = parts['v1']
     if (!timestamp || !signature) return false
 
+    // Reject events older than 5 minutes (prevents replay attacks)
+    const now = Math.floor(Date.now() / 1000)
+    if (Math.abs(now - Number(timestamp)) > 300) return false
+
     const signedPayload = `${timestamp}.${payload}`
     const encoder = new TextEncoder()
     const keyData = encoder.encode(secret)

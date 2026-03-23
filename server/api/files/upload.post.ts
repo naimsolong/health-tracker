@@ -14,7 +14,7 @@ const ALLOWED_MIME_TYPES = [
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10 MB
 
 export default defineEventHandler(async (event) => {
-  const authUser = requireAuth(event)
+  const authUser = await requireAuth(event)
   const db = useDb(event)
 
   // Check subscription
@@ -39,8 +39,13 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'File type not allowed. Use PDF, JPEG, PNG, WEBP, or TXT.' })
   }
 
-  if (fileSize && fileSize > MAX_FILE_SIZE) {
-    throw createError({ statusCode: 400, message: 'File too large. Maximum size is 10 MB.' })
+  // Require fileSize — reject if missing or exceeds limit (client must always supply it)
+  if (!fileSize || typeof fileSize !== 'number' || fileSize <= 0 || fileSize > MAX_FILE_SIZE) {
+    throw createError({ statusCode: 400, message: 'fileSize is required and must be between 1 byte and 10 MB' })
+  }
+
+  if (typeof filename !== 'string' || filename.length > 255) {
+    throw createError({ statusCode: 400, message: 'filename must be 255 characters or fewer' })
   }
 
   // Sanitize filename and build R2 key
@@ -70,7 +75,8 @@ export default defineEventHandler(async (event) => {
     })
     .returning()
 
-  return { fileId: file.id, r2Key, uploadReady: true }
+  // Do NOT expose r2Key — internal storage path is not needed by the client
+  return { fileId: file.id, uploadReady: true }
 })
 
 // Minimal R2Bucket type for TypeScript

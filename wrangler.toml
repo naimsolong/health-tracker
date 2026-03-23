@@ -12,8 +12,8 @@ migrations_dir = "server/database/migrations"
 binding = "FILES_BUCKET"
 bucket_name = "health-tracker-files"
 
+# Secrets must NOT be stored here. Set them in Cloudflare Pages dashboard:
+# Settings → Environment Variables → Add secret (encrypted).
+# Use: JWT_SECRET, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_PRICE_ID
 [vars]
-JWT_SECRET = "3e8a18f12169b4ba17c02ebd64af8696637599f8774c5ebe93b1496ec47759f3"
-STRIPE_SECRET_KEY = ""
-STRIPE_WEBHOOK_SECRET = ""
-STRIPE_PRICE_ID = ""
+APP_ENV = "production"
