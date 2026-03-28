@@ -3,15 +3,17 @@ import { eq, and } from 'drizzle-orm'
 import { healthEntries } from '../../database/schema'
 import { requireAuth } from '../../utils/auth'
 import { useDb } from '../../utils/db'
+import { assertMaxLength } from '../../utils/validate'
 
 export default defineEventHandler(async (event) => {
-  const user = requireAuth(event)
+  const user = await requireAuth(event)
   const body = await readBody(event)
   const db = useDb(event)
 
   if (!body.date) {
     throw createError({ statusCode: 400, message: 'Date is required' })
   }
+  assertMaxLength(body.notes, 'notes', 2000)
 
   // Upsert: update if entry for same date exists
   const existing = await db

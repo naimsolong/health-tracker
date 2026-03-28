@@ -5,7 +5,7 @@ import { useDb } from '../../utils/db'
 import { createError } from 'h3'
 
 export default defineEventHandler(async (event) => {
-  const user = requireAuth(event)
+  const user = await requireAuth(event)
   const db = useDb(event)
   const id = Number(event.context.params?.id)
 

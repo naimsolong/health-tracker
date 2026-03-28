@@ -1,5 +1,5 @@
-import { eq, and } from 'drizzle-orm'
-import { userGoals } from '../../database/schema'
+import { eq, desc } from 'drizzle-orm'
+import { userFiles } from '../../database/schema'
 import { requireAuth } from '../../utils/auth'
 import { useDb } from '../../utils/db'
 
@@ -7,11 +7,12 @@ export default defineEventHandler(async (event) => {
   const user = await requireAuth(event)
   const db = useDb(event)
 
-  const goals = await db
+  const files = await db
     .select()
-    .from(userGoals)
-    .where(and(eq(userGoals.userId, user.id), eq(userGoals.isActive, true)))
+    .from(userFiles)
+    .where(eq(userFiles.userId, user.id))
+    .orderBy(desc(userFiles.createdAt))
     .all()
 
-  return { goals }
+  return { files }
 })

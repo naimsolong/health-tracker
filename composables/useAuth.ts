@@ -1,5 +1,5 @@
 export function useAuth() {
-  const user = useState<{ id: number; name: string; email: string } | null>('auth-user', () => null)
+  const user = useState<{ id: number; name: string; email: string; subscriptionStatus: string } | null>('auth-user', () => null)
 
   async function fetchUser() {
     const { data, error } = await useFetch('/api/auth/me')

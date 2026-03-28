@@ -11,6 +11,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     jwtSecret: process.env.JWT_SECRET || 'dev-secret-change-in-production',
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',
+    stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || '',
+    stripePriceId: process.env.STRIPE_PRICE_ID || '',
     public: {
       appName: 'Health Tracker',
     },

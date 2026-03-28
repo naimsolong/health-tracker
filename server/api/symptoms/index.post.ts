@@ -2,15 +2,18 @@ import { readBody, createError } from 'h3'
 import { symptomsLog } from '../../database/schema'
 import { requireAuth } from '../../utils/auth'
 import { useDb } from '../../utils/db'
+import { assertMaxLength } from '../../utils/validate'
 
 export default defineEventHandler(async (event) => {
-  const user = requireAuth(event)
+  const user = await requireAuth(event)
   const body = await readBody(event)
   const db = useDb(event)
 
   if (!body.symptom) {
     throw createError({ statusCode: 400, message: 'symptom is required' })
   }
+  assertMaxLength(body.symptom, 'symptom', 200)
+  assertMaxLength(body.notes, 'notes', 2000)
 
   const now = new Date()
   const loggedAt = now.toISOString().replace('T', ' ').split('.')[0]

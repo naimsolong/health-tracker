@@ -1,13 +1,30 @@
-import { readBody } from 'h3'
+import { readBody, createError } from 'h3'
 import { eq } from 'drizzle-orm'
 import { userMedicalProfile } from '../../database/schema'
 import { requireAuth } from '../../utils/auth'
 import { useDb } from '../../utils/db'
+import { assertMaxLength } from '../../utils/validate'
 
 export default defineEventHandler(async (event) => {
-  const user = requireAuth(event)
+  const user = await requireAuth(event)
   const body = await readBody(event)
   const db = useDb(event)
+
+  assertMaxLength(body.notes, 'notes', 2000)
+
+  // Cap JSON array fields to prevent storage abuse
+  if (Array.isArray(body.allergies) && body.allergies.length > 100) {
+    throw createError({ statusCode: 400, message: 'Too many allergies entries (max 100)' })
+  }
+  if (Array.isArray(body.chronicConditions) && body.chronicConditions.length > 100) {
+    throw createError({ statusCode: 400, message: 'Too many chronicConditions entries (max 100)' })
+  }
+  if (Array.isArray(body.currentMedications) && body.currentMedications.length > 200) {
+    throw createError({ statusCode: 400, message: 'Too many currentMedications entries (max 200)' })
+  }
+  if (Array.isArray(body.familyHistory) && body.familyHistory.length > 100) {
+    throw createError({ statusCode: 400, message: 'Too many familyHistory entries (max 100)' })
+  }
 
   const payload = {
     height: body.height ?? null,
