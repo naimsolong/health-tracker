@@ -7,6 +7,10 @@ import { useDb } from '../../utils/db'
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default defineEventHandler(async (event) => {
+  // Registration is currently disabled — remove this throw to re-enable
+  throw createError({ statusCode: 404, message: 'Not found' })
+
+  // eslint-disable-next-line no-unreachable
   const body = await readBody(event)
   const { name, email, password } = body
 

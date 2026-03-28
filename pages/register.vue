@@ -1,5 +1,5 @@
 <script setup lang="ts">
-definePageMeta({ middleware: 'guest' })
+definePageMeta({ middleware: () => navigateTo('/login') })
 
 const { register } = useAuth()
 
